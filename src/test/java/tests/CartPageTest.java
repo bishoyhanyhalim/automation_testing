@@ -23,7 +23,7 @@ public class CartPageTest extends BaseTest {
         driver = DriverManager.getDriver();
         driver.get("https://www.saucedemo.com/");
         System.out.println("Driver initialized successfully");
-        System.out.println("Navigated to sauce demo.com");
+        System.out.println("Navigated to saucedemo.com");
 
         LoginPage loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
@@ -39,22 +39,22 @@ public class CartPageTest extends BaseTest {
                 "Products page was not loaded successfully after login");
         System.out.println("Products page loaded successfully");
 
-        // Add "Sauce Labs Bike Light" to the cart directly
+        // Add "Sauce Labs Bike Light" to cart directly
         By addToCartButton = By.id("add-to-cart-sauce-labs-bike-light");
         HelperMethods.waitForVisibility(addToCartButton);
         HelperMethods.clickWithRetry(addToCartButton, 3);
         System.out.println("Clicked Add to Cart for Sauce Labs Bike Light");
 
-        // Wait for the cart badge to update to confirm addition
+        // Wait for cart badge to update to confirm addition
         HelperMethods.waitForVisibility(By.cssSelector("#shopping_cart_container > a > span"));
         HelperMethods.wait(2); // Reduced wait to 2 seconds
         System.out.println("Cart badge updated, count: " + cartPage.getCartItemCount());
 
         // Navigate to Cart page
         productsPage.navigateToCart();
-        // Wait for the cart page to load and items to appear
+        // Wait for cart page to load and items to appear
         By cartItemName = By.xpath("//div[@class='inventory_item_name' and text()='Sauce Labs Bike Light']");
-        HelperMethods.waitForVisibility(cartItemName); // Wait for a specific item
+        HelperMethods.waitForVisibility(cartItemName); // Wait for specific item
         HelperMethods.waitForVisibility(By.cssSelector("#cart_contents_container"));
         System.out.println("Navigated to Cart page after adding product. Current URL: " + driver.getCurrentUrl());
 
